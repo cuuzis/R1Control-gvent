@@ -1,9 +1,5 @@
 package it.unibz.r1control.model.data;
 
-/**
- *
- * Created by Matthias on 16.12.2015.
- */
 public class MotorSpeed {
 
     public static final byte STAY = (byte)0x80;

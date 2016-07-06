@@ -6,14 +6,14 @@ public class SensorValues {
 	private MotorControlData mcData;
 	private TemperatureData tmpData;
 	private UltrasonicData [] usData;
-	
+
 	public SensorValues() {
 		irData = new InfraRedData[2];
 		usData = new UltrasonicData[8];
 	}
 
-	public InfraRedData getIrData(int i) {
-		return irData[i];
+	public int getIrData(int i) {
+		return irData[i].getValue();
 	}
 
 	public MagnetometerData getMgData() {
@@ -28,8 +28,8 @@ public class SensorValues {
 		return tmpData;
 	}
 
-	public UltrasonicData getUsData(int i) {
-		return usData[i];
+	public short getUsData(int i) {
+		return usData[i].getValue();
 	}
 
 	public void setIrData(int i, InfraRedData irData) {
@@ -51,6 +51,6 @@ public class SensorValues {
 	public void setUsData(int i, UltrasonicData usData) {
 		this.usData[i] = usData;
 	}
-	
-	
+
+
 }

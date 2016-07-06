@@ -8,11 +8,126 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@android:style/Theme.Light.NoTitleBar"
     tools:context=".controller.robot_control.MainActivity">
 
     <TextView
-        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bluetooth:"
+        android:id="@+id/btLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="pending..."
+        android:id="@+id/btInfo"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/btLabel"
+        android:layout_toEndOf="@+id/btLabel" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/robotPlate"
+        android:src="@drawable/robot_plate"
+        android:layout_alignTop="@+id/sensor2"
+        android:layout_alignLeft="@+id/sensor1"
+        android:layout_alignStart="@+id/sensor1"
+        android:layout_alignRight="@+id/sensor4"
+        android:layout_alignEnd="@+id/sensor4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s1"
+        android:id="@+id/sensor1"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/btLabel"
+        android:layout_alignRight="@+id/btLabel"
+        android:layout_alignEnd="@+id/btLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s2"
+        android:id="@+id/sensor2"
+        android:layout_alignBottom="@+id/sensor1"
+        android:layout_toRightOf="@+id/sensor1"
+        android:layout_toEndOf="@+id/sensor1"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s3"
+        android:id="@+id/sensor3"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:layout_alignTop="@+id/robotPlate"
+        android:layout_toRightOf="@+id/btInfo"
+        android:layout_toEndOf="@+id/btInfo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s4"
+        android:id="@+id/sensor4"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:layout_below="@+id/sensor3"
+        android:layout_toRightOf="@+id/sensor3"
+        android:layout_toEndOf="@+id/sensor3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s5"
+        android:id="@+id/sensor5"
+        android:layout_alignBottom="@+id/robotPlate"
+        android:layout_alignLeft="@+id/robotPlate"
+        android:layout_alignStart="@+id/robotPlate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s6"
+        android:id="@+id/sensor6"
+        android:layout_alignTop="@+id/sensor7"
+        android:layout_alignLeft="@+id/sensor2"
+        android:layout_alignStart="@+id/sensor2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s7"
+        android:id="@+id/sensor7"
+        android:layout_below="@+id/robotPlate"
+        android:layout_toLeftOf="@+id/sensor4"
+        android:layout_toStartOf="@+id/sensor4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="s8"
+        android:id="@+id/sensor8"
+        android:layout_above="@+id/sensor7"
+        android:layout_alignLeft="@+id/sensor4"
+        android:layout_alignStart="@+id/sensor4" />
+
 </RelativeLayout>

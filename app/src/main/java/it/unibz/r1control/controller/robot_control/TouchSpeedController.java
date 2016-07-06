@@ -15,7 +15,7 @@ import it.unibz.r1control.model.data.MotorSpeed;
  *
  * Created by Matthias on 10.12.2015.
  */
-public class TouchSpeedController implements SpeedController, View.OnTouchListener {
+public class TouchSpeedController implements View.OnTouchListener {
 
     private static final byte STAY = (byte)128;
 
@@ -35,12 +35,12 @@ public class TouchSpeedController implements SpeedController, View.OnTouchListen
         requestedSpeed = new MotorSpeed();
     }
 
-    @Override
+
     public void start() {
         touchableArea.setOnTouchListener(this);
     }
 
-    @Override
+
     public MotorSpeed getRequestedSpeed() {
         return requestedSpeed;
     }

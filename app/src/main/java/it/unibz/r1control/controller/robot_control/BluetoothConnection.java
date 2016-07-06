@@ -1,5 +1,6 @@
 package it.unibz.r1control.controller.robot_control;
 
+import it.unibz.r1control.R;
 import it.unibz.r1control.model.data.InfraRedData;
 import it.unibz.r1control.model.data.MagnetometerData;
 import it.unibz.r1control.model.data.MotorControlData;
@@ -26,6 +27,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.widget.TextView;
 
 public class BluetoothConnection {
 
@@ -36,13 +38,14 @@ public class BluetoothConnection {
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	private final String bluetoothName = "HC-06";
+	private int REQUEST_ENABLE_BT = 1;
 	private BluetoothDevice r1Device;
 	private BluetoothAdapter mBluetoothAdapter;
 	private BluetoothSocket mmSocket;
 	private InputStream btInput;
 	private OutputStream btOutput;
 	private Activity myActivity;
-	private SpeedController speedCtrl;
+	private TouchSpeedController speedCtrl;
 
 	private final List<SensorValues> history;
 	private SensorValues currentValues;
@@ -54,14 +57,16 @@ public class BluetoothConnection {
 	private final byte[] cmdScan    = {0x5A, 0x04, MotorSpeed.STAY, MotorSpeed.STAY};
 	private final byte[] r1Data     = new byte[60];
 	
-	public BluetoothConnection(Activity myActivity, SpeedController speedCtrl) {
+	public BluetoothConnection(Activity myActivity, TouchSpeedController speedCtrl, BluetoothAdapter mBluetoothAdapter) {
 		this.myActivity = myActivity;
 		this.speedCtrl = speedCtrl;
+		this.mBluetoothAdapter = mBluetoothAdapter;
 		this.history = new LinkedList<>();
 		this.setupBluetooth();
 	}
 	// Create a BroadcastReceiver for ACTION_FOUND
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			// When discovery finds a device
@@ -82,6 +87,7 @@ public class BluetoothConnection {
 
 	// Sends a command to retrieve the device's version and writes the answer to the command line.
 	private final Runnable getVersion = new Runnable() {
+		@Override
 		public void run() {
 			try {
 				writeCommand(cmdVersion);
@@ -99,6 +105,7 @@ public class BluetoothConnection {
 
 	// Sends a command to set the current speed to the device and writes the answer to the history.
 	private final Runnable scanCycle = new Runnable() {
+		@Override
 		public void run() {
 			try {
 				writeCommand(speedCtrl.getRequestedSpeed());
@@ -223,20 +230,11 @@ public class BluetoothConnection {
 	}
 
 	private void setupBluetooth() {
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		if (mBluetoothAdapter == null) {
-			// Device does not support Bluetooth
-			System.out.println("Device does not support Bluetooth");
-		}
-		else if (!mBluetoothAdapter.isEnabled()) {
-			System.out.println("Bluetooth is not enabled");
-		}
-		else {
 			IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 			myActivity.registerReceiver(mReceiver, filter);
 
 			r1Device = null;
-			mBluetoothAdapter.startDiscovery();
-		}
+			//mBluetoothAdapter.startDiscovery();
+
 	}
 }

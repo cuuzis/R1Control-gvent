@@ -16,4 +16,8 @@ public class TemperatureData {
 		value[7] = v8;
 		value[8] = v9;
 	}
+	public int getTemperatureData(int i)
+	{
+		return (int)value[i];
+	}
 }
