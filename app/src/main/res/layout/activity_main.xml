@@ -48,10 +48,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s1"
         android:id="@+id/sensor1"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="44dp"
         android:layout_below="@+id/btLabel"
-        android:layout_alignRight="@+id/btLabel"
-        android:layout_alignEnd="@+id/btLabel" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,8 +64,8 @@
         android:layout_alignBottom="@+id/sensor1"
         android:layout_toRightOf="@+id/sensor1"
         android:layout_toEndOf="@+id/sensor1"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp"
         android:layout_marginBottom="21dp" />
 
     <TextView
@@ -72,11 +74,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s3"
         android:id="@+id/sensor3"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp"
         android:layout_alignTop="@+id/robotPlate"
-        android:layout_toRightOf="@+id/btInfo"
-        android:layout_toEndOf="@+id/btInfo" />
+        android:layout_toRightOf="@+id/sensor2"
+        android:layout_toEndOf="@+id/sensor2" />
 
     <TextView
         android:layout_width="wrap_content"
