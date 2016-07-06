@@ -6,12 +6,14 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private BluetoothConnection myConnection;
     private TouchSpeedController speedCtrl;
 
@@ -31,8 +33,7 @@ public class MainActivity extends Activity {
             ((TextView) findViewById(R.id.btInfo) ).setText("not supported");
         }
         else if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            promptToEnableBluetooth();
         }
         else {
             myConnection = new BluetoothConnection(this, speedCtrl, mBluetoothAdapter);
@@ -47,12 +48,24 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_transparency:
+                //showTranspSeekBar();
+                return true;
+            case R.id.action_enable_BT:
+                promptToEnableBluetooth();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -64,5 +77,10 @@ public class MainActivity extends Activity {
         else {
             ((TextView) findViewById(R.id.btInfo) ).setText("not enabled");
         }
+    }
+
+    private void promptToEnableBluetooth() {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
     }
 }
