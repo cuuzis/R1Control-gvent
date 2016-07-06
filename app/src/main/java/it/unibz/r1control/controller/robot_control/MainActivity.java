@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     private TouchSpeedController speedCtrl;
 
     private BluetoothAdapter mBluetoothAdapter;
-    private int REQUEST_ENABLE_BT = 1;
+    private final int REQUEST_ENABLE_BT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
