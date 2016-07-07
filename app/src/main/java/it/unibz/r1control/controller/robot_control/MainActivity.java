@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectToRobot() {
-        speedCtrl = new TouchSpeedController(findViewById(R.id.root));
+        speedCtrl = new TouchSpeedController(this, findViewById(R.id.root));
         myConnection = new BluetoothConnection(this, speedCtrl, mBluetoothAdapter);
         //setting values on intarface after initialiazing
         new setSensorValues().execute();
@@ -131,35 +131,27 @@ public class MainActivity extends AppCompatActivity {
                     ((TextView) view.findViewById(R.id.sensor8)).setText(String.valueOf(value6));
 
                     // InfraRed Sensors
-                    //generalFragment.setInfraRedSensors(data.getIrData(0), data.getIrData(1));
-                    String value = "1: "+data.getIrData(0) +",2:"+data.getIrData(1);
-                    ((TextView) view.findViewById(R.id.irValue1)).setText(value);
+                    ((TextView) view.findViewById(R.id.irValue1)).setText(String.valueOf(data.getIrData(0)));
+                    ((TextView) view.findViewById(R.id.irValue2)).setText(String.valueOf(data.getIrData(1)));
 
                     // Magnetometer
-                    //generalFragment.setMagnometerData(data.getMgData());  //Magnometer
                     MagnetometerData magnometerData = data.getMgData();
-                    value = "Bearing: "+ magnometerData.getBearing();
-                    value = value +" Pitch: "+ magnometerData.getPitch();
-                    value = value +" Roll: "+ magnometerData.getRoll();
-                    ((TextView) view.findViewById(R.id.bearingValue)).setText(String.valueOf(value));
+                    ((TextView) view.findViewById(R.id.bearingValue)).setText(String.valueOf(magnometerData.getBearing()));
+                    ((TextView) view.findViewById(R.id.pitchValue)).setText(String.valueOf(magnometerData.getPitch()));
+                    ((TextView) view.findViewById(R.id.rollValue)).setText(String.valueOf(magnometerData.getRoll()));
 
                     // Motor
-                    //generalFragment.setMotorControlData(data.getMcData()); //MotorControlData
                     MotorControlData motorControlData = data.getMcData();
-                    value = "Left current: "+  motorControlData.getLeftCurrent();
-                    value = value +" Right current: "+ motorControlData.getRightCurrent();
-                    value = value +" Voltage: "+ motorControlData.getVoltage();
-                    ((TextView) view.findViewById(R.id.leftCurrValue)).setText(String.valueOf(value));
+                    ((TextView) view.findViewById(R.id.leftCurrValue)).setText(String.valueOf(motorControlData.getLeftCurrent()));
+                    ((TextView) view.findViewById(R.id.rightCurrValue)).setText(String.valueOf(motorControlData.getRightCurrent()));
+                    String value = String.valueOf(motorControlData.getVoltage());
+                    value = value.substring(0, value.length()-1) + "." + value.substring(value.length()-1, value.length());
+                    ((TextView) view.findViewById(R.id.voltageValue)).setText(value);
 
                     // Temperature
-                    //generalFragment.setTemperature( data.getTmpData()); //get temperature
                     TemperatureData temperatureData = data.getTmpData();
-                    value = temperatureData.getTemperatureData(0)+" C";
-                    value = value+" "+temperatureData.getTemperatureData(1)+" C";
-                    ((TextView) view.findViewById(R.id.temperatureValue1)).setText(String.valueOf(value));
-
-
-                    //isRunOnUiThreadFinished = true;
+                    ((TextView) view.findViewById(R.id.temperatureValue1)).setText(temperatureData.getTemperatureData(0) + "C");
+                    ((TextView) view.findViewById(R.id.temperatureValue2)).setText(temperatureData.getTemperatureData(1) + "C");
                 }
 
                 protected void onPostExecute() {
@@ -172,11 +164,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Async trask in charge of setting the values on the interface with a sleep of 1 second =TIME_INTERFACE_REFRESH
+    //Async task in charge of setting the values on the interface with a sleep of 1 second = TIME_INTERFACE_REFRESH
     private class setSensorValues extends AsyncTask<Void , Void, Void> {
 
         protected Void doInBackground(Void ... params) {
-
             while (true)
             {
                 try {
@@ -185,17 +176,13 @@ public class MainActivity extends AppCompatActivity {
                     Thread.currentThread().interrupt();
                 }
 
-                //befire sendin values checking if is connected to the bluethooth
+                //before sending values checking if is connected to the bluetooth
                 if(myConnection.isConnected() && myConnection.isValueSetted())
                 {
-
                     sensorValues = myConnection.getCurrentValues();
                     OnNewSensorData(sensorValues);
-
                 }
-
             }
-
         }
 
     }

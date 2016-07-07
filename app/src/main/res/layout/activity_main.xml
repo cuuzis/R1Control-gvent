@@ -50,7 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="110dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="100dp" />
+        android:layout_marginLeft="110dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="220dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="70dp"
-        android:layout_marginLeft="40dp" />
+        android:layout_marginLeft="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -166,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Left current:"
+        android:text="Left current: "
         android:id="@+id/leftCurrent"
         android:layout_below="@+id/motorLabel"
         android:layout_alignRight="@+id/motorLabel"
@@ -186,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Right current:"
+        android:text="Right current: "
         android:id="@+id/rightCurrent"
         android:layout_alignTop="@+id/leftCurrent"
         android:layout_alignLeft="@+id/leftCurrent"
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Voltage:"
+        android:text="Voltage: "
         android:id="@+id/voltage"
         android:layout_below="@+id/rightCurrent"
         android:layout_toLeftOf="@+id/bearingValue"
@@ -238,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Bearing:"
+        android:text="Bearing: "
         android:id="@+id/bearingLabel"
         android:layout_below="@+id/magnetoLabel"
         android:layout_alignRight="@+id/magnetoLabel"
@@ -258,7 +258,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Pitch:"
+        android:text="Pitch: "
         android:id="@+id/pitchLabel"
         android:layout_below="@+id/bearingLabel"
         android:layout_alignRight="@+id/bearingLabel"
@@ -278,7 +278,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Roll:"
+        android:text="Roll: "
         android:id="@+id/rollLabel"
         android:layout_below="@+id/pitchLabel"
         android:layout_alignRight="@+id/pitchLabel"
@@ -298,7 +298,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Temperature1:"
+        android:text="TemperatureI: "
         android:id="@+id/temperatureLabel1"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/rollLabel"
@@ -319,7 +319,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Temperature2:"
+        android:text="TemperatureII: "
         android:id="@+id/temperatureLabel2"
         android:layout_alignTop="@+id/temperatureValue1"
         android:layout_toLeftOf="@+id/rightCurrValue"
