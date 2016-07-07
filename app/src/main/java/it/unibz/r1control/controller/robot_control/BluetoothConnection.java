@@ -38,7 +38,6 @@ public class BluetoothConnection {
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	private final String bluetoothName = "HC-06";
-	private int REQUEST_ENABLE_BT = 1;
 	private BluetoothDevice r1Device;
 	private BluetoothAdapter mBluetoothAdapter;
 	private BluetoothSocket mmSocket;
@@ -51,6 +50,9 @@ public class BluetoothConnection {
 	private SensorValues currentValues;
 
 	private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    private TextView bluetoothStatus;
+    private boolean bluetoothStatusFlag = false;
+    private boolean isValueSetted = false;
 
 	// Buffers for IO
 	private final byte[] cmdVersion = {0x5A, 0x02, 0x00, 0x00};
@@ -62,6 +64,7 @@ public class BluetoothConnection {
 		this.speedCtrl = speedCtrl;
 		this.mBluetoothAdapter = mBluetoothAdapter;
 		this.history = new LinkedList<>();
+        bluetoothStatus = (TextView)myActivity.findViewById(R.id.btInfo);
 		this.setupBluetooth();
 	}
 	// Create a BroadcastReceiver for ACTION_FOUND
@@ -112,7 +115,7 @@ public class BluetoothConnection {
 				//System.out.println("command sent to R1");
 				//System.out.println("left: " + cmdScan[2] + ", right: " + cmdScan[3]);
 
-				currentValues = new SensorValues();
+				//currentValues = new SensorValues();
 				int numBytesRead = readValues();
 				//System.out.println(numBytesRead + " bytes received from R1");
 
@@ -130,12 +133,14 @@ public class BluetoothConnection {
 		BluetoothSocket tmp;
 		// Get a BluetoothSocket to connect with the given BluetoothDevice
 		try {
-			System.out.println("Connecting to: " + device.getName() + " at " + device.getAddress());
+			//System.out.println("Connecting to: " + device.getName() + " at " + device.getAddress());
+            bluetoothStatus.setText("Connecting to \"" + device.getName() +"\"");
 
 			// MY_UUID is the app's UUID string, also used by the server code
 			tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
 		} catch (IOException e) {
 			System.out.println("ConnectThread: " + e);
+            bluetoothStatus.setText("Already connected");
 			mmSocket = null;
 			btInput = null;
 			btOutput = null;
@@ -151,10 +156,15 @@ public class BluetoothConnection {
 			btInput = mmSocket.getInputStream();
 			btOutput = mmSocket.getOutputStream();
 			System.out.println("CONNECTED!");
+            bluetoothStatusFlag = true;
+            bluetoothStatus.setText("Connected " + device.getName());
 
 			speedCtrl.start();
 
 			scheduler.execute(getVersion);
+            currentValues = new SensorValues();
+
+            System.out.println("Starting scheduler...");
 			scheduler.scheduleAtFixedRate(scanCycle, DELAY_MILLIS, DELAY_MILLIS, TimeUnit.MILLISECONDS);
 
 		} catch (IOException connectException) {
@@ -215,6 +225,8 @@ public class BluetoothConnection {
 		currentValues.setIrData(0, new InfraRedData(r1Data[41], r1Data[42]));
 		currentValues.setIrData(1, new InfraRedData(r1Data[43], r1Data[44]));
 
+        isValueSetted = true;
+
 		return numBytesRead;
 	}
 
@@ -224,6 +236,7 @@ public class BluetoothConnection {
 			mmSocket.close();
 			myActivity.unregisterReceiver(mReceiver);
 			scheduler.shutdown();
+            bluetoothStatusFlag = false;
 		} catch (IOException e) {
 			// ignore
 		}
@@ -234,7 +247,16 @@ public class BluetoothConnection {
 			myActivity.registerReceiver(mReceiver, filter);
 
 			r1Device = null;
-			//mBluetoothAdapter.startDiscovery();
-
+			mBluetoothAdapter.startDiscovery();
 	}
+
+    //check if there is any value setted from the robot double checking
+    public boolean isValueSetted() {
+        return isValueSetted;
+    }
+
+    //cheking if the bliethooth is properly connected
+    public boolean isConnected() {
+        return bluetoothStatusFlag;
+    }
 }

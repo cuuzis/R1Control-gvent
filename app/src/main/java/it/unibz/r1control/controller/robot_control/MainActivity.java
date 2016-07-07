@@ -1,6 +1,7 @@
 package it.unibz.r1control.controller.robot_control;
 
 import it.unibz.r1control.R;
+import it.unibz.r1control.model.data.SensorValues;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private final int REQUEST_ENABLE_BT = 1;
 
+    private  SensorValues sensorValues;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             promptToEnableBluetooth();
         }
         else {
+            speedCtrl = new TouchSpeedController(findViewById(R.id.root));
             myConnection = new BluetoothConnection(this, speedCtrl, mBluetoothAdapter);
         }
     }
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            speedCtrl = new TouchSpeedController(findViewById(R.id.root));
             myConnection = new BluetoothConnection(this, speedCtrl, mBluetoothAdapter);
         }
         else {
@@ -82,5 +87,13 @@ public class MainActivity extends AppCompatActivity {
     private void promptToEnableBluetooth() {
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+    }
+
+
+
+    // from MAX
+    //to get the current sensor values
+    public SensorValues getSensorValues() {
+        return sensorValues;
     }
 }
