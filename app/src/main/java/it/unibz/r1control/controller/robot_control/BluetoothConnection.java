@@ -255,7 +255,7 @@ public class BluetoothConnection {
         return isValueSetted;
     }
 
-    //cheking if the bliethooth is properly connected
+    //cheking if the bluethooth is properly connected
     public boolean isConnected() {
         return bluetoothStatusFlag;
     }

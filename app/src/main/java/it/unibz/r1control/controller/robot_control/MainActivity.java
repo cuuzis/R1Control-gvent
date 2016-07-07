@@ -8,6 +8,7 @@ import it.unibz.r1control.model.data.TemperatureData;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private void connectToRobot() {
         speedCtrl = new TouchSpeedController(this, findViewById(R.id.root));
         myConnection = new BluetoothConnection(this, speedCtrl, mBluetoothAdapter);
-        //setting values on intarface after initialiazing
+        //setting values on interface after initializing
         new setSensorValues().execute();
     }
 
@@ -121,18 +122,41 @@ public class MainActivity extends AppCompatActivity {
                     short value7 = (short)Math.abs((int)data.getUsData(7));
 
                     View view = findViewById(R.id.root);
+                    int color;
                     ((TextView) view.findViewById(R.id.sensor1)).setText(String.valueOf(value2));
+                    color = (value2 < speedCtrl.MAX_PROXIMITY_S1) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor1)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor2)).setText(String.valueOf(value3));
+                    color = (value3 < speedCtrl.MAX_PROXIMITY_S2) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor2)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor3)).setText(String.valueOf(value4));
+                    color = (value4 < speedCtrl.MAX_PROXIMITY_S3) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor3)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor4)).setText(String.valueOf(value5));
+                    color = (value5 < speedCtrl.MAX_PROXIMITY_S4) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor4)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor5)).setText(String.valueOf(value1));
+                    color = (value1 < speedCtrl.MAX_PROXIMITY_S5) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor5)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor6)).setText(String.valueOf(value0));
+                    color = (value0 < speedCtrl.MAX_PROXIMITY_S6) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor6)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor7)).setText(String.valueOf(value7));
+                    color = (value7 < speedCtrl.MAX_PROXIMITY_S7) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor7)).setTextColor(color);
                     ((TextView) view.findViewById(R.id.sensor8)).setText(String.valueOf(value6));
+                    color = (value6 < speedCtrl.MAX_PROXIMITY_S8) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.sensor8)).setTextColor(color);
 
                     // InfraRed Sensors
-                    ((TextView) view.findViewById(R.id.irValue1)).setText(String.valueOf(data.getIrData(0)));
-                    ((TextView) view.findViewById(R.id.irValue2)).setText(String.valueOf(data.getIrData(1)));
+                    int infra1 = data.getIrData(0);
+                    int infra2 = data.getIrData(1);
+                    ((TextView) view.findViewById(R.id.irValue1)).setText(String.valueOf(infra1));
+                    color = (infra1 > speedCtrl.MAX_PROXIMITY_INFRARED) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.irValue1)).setTextColor(color);
+                    ((TextView) view.findViewById(R.id.irValue2)).setText(String.valueOf(infra2));
+                    color = (infra2 > speedCtrl.MAX_PROXIMITY_INFRARED) ? Color.RED : Color.rgb(0,128,0);
+                    ((TextView) view.findViewById(R.id.irValue2)).setTextColor(color);
 
                     // Magnetometer
                     MagnetometerData magnometerData = data.getMgData();
@@ -145,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     ((TextView) view.findViewById(R.id.leftCurrValue)).setText(String.valueOf(motorControlData.getLeftCurrent()));
                     ((TextView) view.findViewById(R.id.rightCurrValue)).setText(String.valueOf(motorControlData.getRightCurrent()));
                     String value = String.valueOf(motorControlData.getVoltage());
-                    value = value.substring(0, value.length()-1) + "." + value.substring(value.length()-1, value.length());
+                    value = value.substring(0, value.length()-1) + "." + value.substring(value.length()-1, value.length()) + "V";
                     ((TextView) view.findViewById(R.id.voltageValue)).setText(value);
 
                     // Temperature
@@ -153,14 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     ((TextView) view.findViewById(R.id.temperatureValue1)).setText(temperatureData.getTemperatureData(0) + "C");
                     ((TextView) view.findViewById(R.id.temperatureValue2)).setText(temperatureData.getTemperatureData(1) + "C");
                 }
-
-                protected void onPostExecute() {
-                    System.out.println("Finished executing");
-
-                }
-
             });
-
 
     }
 

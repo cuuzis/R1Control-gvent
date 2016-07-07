@@ -27,8 +27,17 @@ public class TouchSpeedController implements View.OnTouchListener {
     private static final int RIGHT_SPEED_SET = 0b01;
     private static final int BOTH_SPEEDS_SET = 0b11;
 
-    private static final int MAX_PROXIMITY_ULTRASONIC = 30;
-    private static final int MAX_PROXIMITY_INFRARED = 250; //value is inverse to distance
+    private static final int LEFT = 1;
+    private static final int RIGHT = 2;
+    public static final int MAX_PROXIMITY_INFRARED = 250; //value is inverse to distance
+    public static final int MAX_PROXIMITY_S1 = 35;
+    public static final int MAX_PROXIMITY_S2 = 30;
+    public static final int MAX_PROXIMITY_S3 = 30;
+    public static final int MAX_PROXIMITY_S4 = 35;
+    public static final int MAX_PROXIMITY_S5 = 40;
+    public static final int MAX_PROXIMITY_S6 = 40;
+    public static final int MAX_PROXIMITY_S7 = 30;
+    public static final int MAX_PROXIMITY_S8 = 30;
 
     private MainActivity mainActivity;
     private View touchableArea;
@@ -70,12 +79,12 @@ public class TouchSpeedController implements View.OnTouchListener {
                     : (byte)(0xFF * (1 - e.getY(i) / height));
                 if (e.getX(i) - center < 0) {
                     speedsBitSet |= LEFT_SPEED_SET;
-                    if (noCollision(speed)) {
+                    if (noCollision(speed, LEFT)) {
                         requestedSpeed.setLeftSpeed(speed);
                     }
                 } else {
                     speedsBitSet |= RIGHT_SPEED_SET;
-                    if (noCollision(speed)) {
+                    if (noCollision(speed, RIGHT)) {
                         requestedSpeed.setRightSpeed(speed);
                     }
                 }
@@ -86,11 +95,16 @@ public class TouchSpeedController implements View.OnTouchListener {
 
 
     // collision detection
-    public boolean noCollision(byte speed)
+    public boolean noCollision(byte speed, int motor)
     {
-
-        System.out.println("Speed byte:" + speed);
+        // Debug
+        if (motor == LEFT) {
+        System.out.println("Left speed:" + speed);
+        } else {
+            System.out.println("Right speed:" + speed);
+        }
         System.out.println();
+
 
         SensorValues sensorValues = mainActivity.getSensorValues();
 
@@ -112,28 +126,26 @@ public class TouchSpeedController implements View.OnTouchListener {
         int ultra7 = sensorValues.getUsData(7);
         int ultra8 = sensorValues.getUsData(6);
 
-        //checking front sensors if moving forward
+        //checking front sensors when moving forward
         if (  (short)speed > -120  &&  (short)speed < 0  ) {
-            if (ultra1 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra2 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra3 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra4 <= MAX_PROXIMITY_ULTRASONIC
-                    || infra1 >= MAX_PROXIMITY_INFRARED
-                    || infra2 >= MAX_PROXIMITY_INFRARED) {
+            if (       ultra1 <= MAX_PROXIMITY_S1
+                    || ultra2 <= MAX_PROXIMITY_S2
+                    || ultra3 <= MAX_PROXIMITY_S3
+                    || ultra4 <= MAX_PROXIMITY_S4
+                    ||(infra1 >= MAX_PROXIMITY_INFRARED && motor == RIGHT)
+                    ||(infra2 >= MAX_PROXIMITY_INFRARED && motor == LEFT)) {
                 return false;
             }
         }
-        //checking back sensors if moving backward
-        if (  (short)speed > 0  &&  (short)speed < 120  ) {
-            if (       ultra5 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra6 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra7 <= MAX_PROXIMITY_ULTRASONIC
-                    || ultra8 <= MAX_PROXIMITY_ULTRASONIC) {
+        //checking back sensors when moving backward
+        else if (  (short)speed > 0  &&  (short)speed < 120  ) {
+            if (      (ultra5 <= MAX_PROXIMITY_S5 && motor == LEFT)
+                    || ultra6 <= MAX_PROXIMITY_S6
+                    || ultra7 <= MAX_PROXIMITY_S7
+                    ||(ultra8 <= MAX_PROXIMITY_S8 && motor == RIGHT)) {
                 return false;
             }
         }
         return true;
-
-
     }
 }
