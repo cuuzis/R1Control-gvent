@@ -35,11 +35,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/robotPlate"
         android:src="@drawable/robot_plate"
-        android:layout_alignTop="@+id/sensor2"
-        android:layout_alignLeft="@+id/sensor1"
-        android:layout_alignStart="@+id/sensor1"
-        android:layout_alignRight="@+id/sensor4"
-        android:layout_alignEnd="@+id/sensor4" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,12 +47,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s1"
         android:id="@+id/sensor1"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/btLabel"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp" />
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,12 +58,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s2"
         android:id="@+id/sensor2"
-        android:layout_alignBottom="@+id/sensor1"
-        android:layout_toRightOf="@+id/sensor1"
-        android:layout_toEndOf="@+id/sensor1"
-        android:layout_marginLeft="45dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="21dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,11 +69,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s3"
         android:id="@+id/sensor3"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
-        android:layout_alignTop="@+id/robotPlate"
-        android:layout_toRightOf="@+id/sensor2"
-        android:layout_toEndOf="@+id/sensor2" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="180dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,11 +80,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s4"
         android:id="@+id/sensor4"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp"
-        android:layout_below="@+id/sensor3"
-        android:layout_toRightOf="@+id/sensor3"
-        android:layout_toEndOf="@+id/sensor3" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="270dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,9 +91,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s5"
         android:id="@+id/sensor5"
-        android:layout_alignBottom="@+id/robotPlate"
-        android:layout_alignLeft="@+id/robotPlate"
-        android:layout_alignStart="@+id/robotPlate" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -107,9 +102,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s6"
         android:id="@+id/sensor6"
-        android:layout_alignTop="@+id/sensor7"
-        android:layout_alignLeft="@+id/sensor2"
-        android:layout_alignStart="@+id/sensor2" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,9 +113,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s7"
         android:id="@+id/sensor7"
-        android:layout_below="@+id/robotPlate"
-        android:layout_toLeftOf="@+id/sensor4"
-        android:layout_toStartOf="@+id/sensor4" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="200dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -127,60 +124,122 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="s8"
         android:id="@+id/sensor8"
-        android:layout_above="@+id/sensor7"
-        android:layout_alignLeft="@+id/sensor4"
-        android:layout_alignStart="@+id/sensor4" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Infrared:"
-        android:id="@+id/irLabel"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/sensor6"
-        android:layout_toLeftOf="@+id/speedValue"
-        android:layout_toStartOf="@+id/speedValue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="pending..."
-        android:id="@+id/irValue"
-        android:layout_alignTop="@+id/irLabel"
-        android:layout_toRightOf="@+id/irLabel"
-        android:layout_toEndOf="@+id/irLabel" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Speed:"
-        android:id="@+id/speedLabel"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/irValue"
-        android:layout_toLeftOf="@+id/magnetoValue"
-        android:layout_toStartOf="@+id/magnetoValue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Magnetometer:"
-        android:id="@+id/magnetoLabel"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/speedLabel"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="280dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Temperature:"
-        android:id="@+id/temperatureLabel"
-        android:layout_marginTop="20dp"
+        android:text="ir1"
+        android:id="@+id/irValue1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ir2"
+        android:id="@+id/irValue2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="230dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Motor"
+        android:id="@+id/motorLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Left current:"
+        android:id="@+id/leftCurrent"
+        android:layout_below="@+id/motorLabel"
+        android:layout_alignRight="@+id/motorLabel"
+        android:layout_alignEnd="@+id/motorLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/leftCurrValue"
+        android:layout_below="@+id/motorLabel"
+        android:layout_toRightOf="@+id/leftCurrent"
+        android:layout_toEndOf="@+id/leftCurrent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Right current:"
+        android:id="@+id/rightCurrent"
+        android:layout_alignTop="@+id/leftCurrent"
+        android:layout_alignLeft="@+id/leftCurrent"
+        android:layout_alignStart="@+id/leftCurrent"
+        android:layout_marginLeft="150dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/rightCurrValue"
+        android:layout_below="@+id/motorLabel"
+        android:layout_toRightOf="@+id/rightCurrent"
+        android:layout_toEndOf="@+id/rightCurrent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Voltage:"
+        android:id="@+id/voltage"
+        android:layout_below="@+id/rightCurrent"
+        android:layout_toLeftOf="@+id/bearingValue"
+        android:layout_toStartOf="@+id/bearingValue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/voltageValue"
+        android:layout_below="@+id/leftCurrent"
+        android:layout_toRightOf="@+id/leftCurrent"
+        android:layout_toEndOf="@+id/leftCurrent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Magnetometer"
+        android:id="@+id/magnetoLabel"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/voltage"
+        android:layout_alignRight="@+id/motorLabel"
+        android:layout_alignEnd="@+id/motorLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bearing:"
+        android:id="@+id/bearingLabel"
         android:layout_below="@+id/magnetoLabel"
         android:layout_alignRight="@+id/magnetoLabel"
         android:layout_alignEnd="@+id/magnetoLabel" />
@@ -189,30 +248,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="pending..."
-        android:id="@+id/speedValue"
-        android:layout_alignTop="@+id/speedLabel"
-        android:layout_toRightOf="@+id/speedLabel"
-        android:layout_toEndOf="@+id/speedLabel" />
+        android:text="--"
+        android:id="@+id/bearingValue"
+        android:layout_alignTop="@+id/bearingLabel"
+        android:layout_toRightOf="@+id/bearingLabel"
+        android:layout_toEndOf="@+id/bearingLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="pending..."
-        android:id="@+id/magnetoValue"
-        android:layout_alignTop="@+id/magnetoLabel"
-        android:layout_toRightOf="@+id/magnetoLabel"
-        android:layout_toEndOf="@+id/magnetoLabel" />
+        android:text="Pitch:"
+        android:id="@+id/pitchLabel"
+        android:layout_below="@+id/bearingLabel"
+        android:layout_alignRight="@+id/bearingLabel"
+        android:layout_alignEnd="@+id/bearingLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="pending..."
-        android:id="@+id/temperatureValue"
-        android:layout_alignTop="@+id/temperatureLabel"
-        android:layout_toRightOf="@+id/temperatureLabel"
-        android:layout_toEndOf="@+id/temperatureLabel" />
+        android:text="--"
+        android:id="@+id/pitchValue"
+        android:layout_alignTop="@+id/pitchLabel"
+        android:layout_toRightOf="@+id/pitchLabel"
+        android:layout_toEndOf="@+id/pitchLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Roll:"
+        android:id="@+id/rollLabel"
+        android:layout_below="@+id/pitchLabel"
+        android:layout_alignRight="@+id/pitchLabel"
+        android:layout_alignEnd="@+id/pitchLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/rollValue"
+        android:layout_alignTop="@+id/rollLabel"
+        android:layout_toRightOf="@+id/rollLabel"
+        android:layout_toEndOf="@+id/rollLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Temperature1:"
+        android:id="@+id/temperatureLabel1"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/rollLabel"
+        android:layout_alignRight="@+id/rollLabel"
+        android:layout_alignEnd="@+id/rollLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/temperatureValue1"
+        android:layout_alignTop="@+id/temperatureLabel1"
+        android:layout_toRightOf="@+id/temperatureLabel1"
+        android:layout_toEndOf="@+id/temperatureLabel1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Temperature2:"
+        android:id="@+id/temperatureLabel2"
+        android:layout_alignTop="@+id/temperatureValue1"
+        android:layout_toLeftOf="@+id/rightCurrValue"
+        android:layout_toStartOf="@+id/rightCurrValue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="--"
+        android:id="@+id/temperatureValue2"
+        android:layout_alignTop="@+id/temperatureLabel2"
+        android:layout_toRightOf="@+id/temperatureLabel2"
+        android:layout_toEndOf="@+id/temperatureLabel2" />
 
 </RelativeLayout>
