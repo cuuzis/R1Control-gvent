@@ -51,8 +51,8 @@ public class BluetoothConnection {
 
 	private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private TextView bluetoothStatus;
-    private boolean bluetoothStatusFlag = false;
-    private boolean isValueSetted = false;
+    private boolean bluetoothConnected = false;
+    private boolean hasValue = false;
 
 	// Buffers for IO
 	private final byte[] cmdVersion = {0x5A, 0x02, 0x00, 0x00};
@@ -112,10 +112,6 @@ public class BluetoothConnection {
 		public void run() {
 			try {
 				writeCommand(speedCtrl.getRequestedSpeed());
-				//System.out.println("command sent to R1");
-				//System.out.println("left: " + cmdScan[2] + ", right: " + cmdScan[3]);
-
-				//currentValues = new SensorValues();
 				int numBytesRead = readValues();
 				//System.out.println(numBytesRead + " bytes received from R1");
 
@@ -150,13 +146,12 @@ public class BluetoothConnection {
 		mmSocket = tmp;
 
 		try {
-			// Connect the device through the socket. This will block
-			// until it succeeds or throws an exception
+			// Connect the device through the socket. This will block until it succeeds or throws an exception
 			mmSocket.connect();
 			btInput = mmSocket.getInputStream();
 			btOutput = mmSocket.getOutputStream();
 			System.out.println("CONNECTED!");
-            bluetoothStatusFlag = true;
+            bluetoothConnected = true;
             bluetoothStatus.setText("Connected " + device.getName());
 
 			speedCtrl.start();
@@ -224,9 +219,7 @@ public class BluetoothConnection {
 		currentValues.setMcData(new MotorControlData(r1Data[30], r1Data[31], r1Data[32], r1Data[33], r1Data[34], r1Data[35], r1Data[36], r1Data[37], r1Data[38], r1Data[39], r1Data[40]));
 		currentValues.setIrData(0, new InfraRedData(r1Data[41], r1Data[42]));
 		currentValues.setIrData(1, new InfraRedData(r1Data[43], r1Data[44]));
-
-        isValueSetted = true;
-
+        hasValue = true;
 		return numBytesRead;
 	}
 
@@ -236,7 +229,7 @@ public class BluetoothConnection {
 			mmSocket.close();
 			myActivity.unregisterReceiver(mReceiver);
 			scheduler.shutdown();
-            bluetoothStatusFlag = false;
+            bluetoothConnected = false;
 		} catch (IOException e) {
 			// ignore
 		}
@@ -250,13 +243,11 @@ public class BluetoothConnection {
 			mBluetoothAdapter.startDiscovery();
 	}
 
-    //check if there is any value setted from the robot double checking
-    public boolean isValueSetted() {
-        return isValueSetted;
+    public boolean hasValues() {
+        return hasValue;
     }
 
-    //cheking if the bluethooth is properly connected
     public boolean isConnected() {
-        return bluetoothStatusFlag;
+        return bluetoothConnected;
     }
 }

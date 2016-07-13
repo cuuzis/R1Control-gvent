@@ -8,16 +8,6 @@ import java.io.Console;
 import it.unibz.r1control.model.data.MotorSpeed;
 import it.unibz.r1control.model.data.SensorValues;
 
-/**
- * Implements a Speed controller by listening to touch inputs on a given View. This View is split in
- * a left and a right part to set the speed of the left and right wheel, respectively. In each
- * region, we check the y-coordinate in relation to the view's full height. Touching at the bottom
- * will tell the corresponding wheel to turn backward at full speed, while touching at the top will
- * tell it to turn forward at full speed. Similarly, touching at the center will tell the wheel to
- * stop.
- *
- * Created by Matthias on 10.12.2015.
- */
 public class TouchSpeedController implements View.OnTouchListener {
 
     private static final byte STAY = (byte)128;

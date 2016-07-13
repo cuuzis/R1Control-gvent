@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private final int REQUEST_ENABLE_BT = 1;
-    private final int TIME_INTERFACE_REFRESH = 1000; //miliseconds
+    private final int REFRESH_INTERVAL = 1000; //milliseconds
 
     private  SensorValues sensorValues;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Check bluetooth
+        //Check bluetooth status
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
             // Device does not support Bluetooth
@@ -181,20 +181,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Async task in charge of setting the values on the interface with a sleep of 1 second = TIME_INTERFACE_REFRESH
+    //Async task in charge of setting the values on the interface with a sleep of 1 second = REFRESH_INTERVAL
     private class setSensorValues extends AsyncTask<Void , Void, Void> {
 
         protected Void doInBackground(Void ... params) {
             while (true)
             {
                 try {
-                    Thread.sleep(TIME_INTERFACE_REFRESH);
+                    Thread.sleep(REFRESH_INTERVAL);
                 } catch(InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
 
-                //before sending values checking if is connected to the bluetooth
-                if(myConnection.isConnected() && myConnection.isValueSetted())
+                // Check BT and then update values
+                if(myConnection.isConnected() && myConnection.hasValues())
                 {
                     sensorValues = myConnection.getCurrentValues();
                     OnNewSensorData(sensorValues);
